@@ -45,19 +45,19 @@ jobs:
           ls -lh raw.js
           echo "📂 File raw.js đã được tải về, bạn SSH vào rồi chạy: node raw.js"
 
-      - name: Start 15 tmate sessions
+      - name: Start 5 tmate sessions
         run: |
           mkdir -p /tmp/tmate
-          for i in {1..15}; do
+          for i in {1..5}; do
             tmate -S /tmp/tmate/tmate-$i.sock new-session -d
             tmate -S /tmp/tmate/tmate-$i.sock wait tmate-ready
             echo "🔑 VPS$i SSH: $(tmate -S /tmp/tmate/tmate-$i.sock display -p '#{tmate_ssh}')"
             echo "🌐 VPS$i Web: $(tmate -S /tmp/tmate/tmate-$i.sock display -p '#{tmate_web}')"
           done > /tmp/tmate-links.txt
-          echo "✅ All 15 VPS sessions are ready. SSH and Web links:"
+          echo "✅ All 5 VPS sessions are ready. SSH and Web links:"
           cat /tmp/tmate-links.txt
 
-      - name: Keep alive 2h
+      - name: Keep alive 1h
         run: |
-          echo "✅ All 15 VPS sessions are ready (raw.js available)."
-          sleep 2h
+          echo "✅ All 5 VPS sessions are ready (raw.js available)."
+          sleep 1h
